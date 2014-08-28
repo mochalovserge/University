@@ -1,9 +1,10 @@
 % Автор:
 % Дата: 28.08.2014
 :-dynamic автор/4.
-goal:-show_menu.
+goal:-загрузить_базу_данных,
+      показать_меню.
 
-show_menu:-repeat,
+показать_меню:-repeat,
          write('1. создать базу данных'), nl,
          write('2. просмотр базы данных'), nl,
          write('3. добавление записи'), nl,
@@ -17,9 +18,9 @@ show_menu:-repeat,
          
 process(6).
 process(1):-создать_базу_данных.
-process(2).
+process(2):-просмотр_базы_данных.
 process(3):-запись_в_базу.
-process(4).
+process(4):-удалить_запись_из_базы.
 process(5).
 
 создать_базу_данных:-write('формирование базы'), nl,
@@ -27,8 +28,8 @@ process(5).
                      write('новая запись? y/n'), nl,
                      read(A),
                      ответ(A),
-                     tell('C:\autors.txt'),
-                     listing(автор/3),
+                     tell('D:\\Институт\\source\\University\\prolog_kr\\autors.txt'),
+                     listing(автор/4),
                      told.
 ответ(n).
 ответ(y):-запись_в_базу,
@@ -44,6 +45,21 @@ process(5).
                write('год издания:'),
                read(Year),
                assertz(автор(AuthorName, BookName, Producer, Year)).
-               
-               
-               
+
+загрузить_базу_данных:-consult('D:\\Институт\\source\\University\\prolog_kr\\autors.txt'),
+                       told.
+
+просмотр_базы_данных:-write('Просмотр базы данных'), nl,
+                      listing(автор/4).
+
+удалить_запись_из_базы:-write('Удалить по имени: '),
+                        read(AuthorName),
+                        автор(AuthorName, _, _, _),
+                        write(AuthorName), write(' - удален.'), nl,
+                        retract(автор(AuthorName, _, _, _)),
+                        fail.
+
+сохранить_базу_данных:-tell('D:\\Институт\\source\\University\\prolog_kr\\autors.txt'),
+                       listing(автор/4),
+                       told.
+

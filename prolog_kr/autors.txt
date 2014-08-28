@@ -1,0 +1,7 @@
+:- dynamic автор/4.
+
+автор(sdfsdfdsdsf, sdfsdsdsdf, sddssdfff, 123).
+автор(ssdsdfsdff, sdfsdfdff, wewerwer, 123).
+автор(w1, w1, w1, w1).
+автор(w2, w2, w2, w2).
+
