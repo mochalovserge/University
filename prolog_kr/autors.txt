@@ -3,5 +3,4 @@
 автор(werwewerrr, werrrr, werrrrr, 1231233).
 автор(sdasdfsdf11111, sadddd234234234, 213123, 1212333).
 автор(name3, saasdasddd, asasdd, 12333).
-автор(name44, sdfsdff, sfdfff23444, 12223).
 

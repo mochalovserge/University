@@ -17,7 +17,7 @@ goal:-загрузка,
                read(X),
                process(X),!.
                
-process(0).
+process(0):-сохранить_файл.
 process(1):-просмотр_базы_данных.
 process(2):-добавление_записи.
 process(3):-удалить_запись.
@@ -43,8 +43,7 @@ process(_):-fail.
                read(Producer),
                write('год издани€:'),
                read(Year),
-               assertz(автор(AuthorName, BookName, Producer, Year)),
-               сохранить_файл.
+               assertz(автор(AuthorName, BookName, Producer, Year)).
 
 просмотр_базы_данных:-write('ѕросмотр базы данных'), nl,
                       listing(автор/4),
@@ -55,7 +54,6 @@ process(_):-fail.
                 автор(AuthorName, _, _, _),
                 write(AuthorName), write(' - удален.'), nl, nl,
                 retract(автор(AuthorName, _, _, _)),
-                сохранить_файл,
                 fail.
 
 сохранить_файл:-tell('C:\\Users\\serge\\»нститут\\source\\University\\prolog_kr\\autors.txt'),
