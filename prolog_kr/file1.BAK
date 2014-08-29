@@ -59,3 +59,11 @@ process(_):-fail.
 сохранить_файл:-tell('C:\\Users\\serge\\Институт\\source\\University\\prolog_kr\\autors.txt'),
                 listing(автор/4),
                 told.
+                
+запрос_к_базе:-write('Вывод строк по заданию:'), nl, nl,
+               write('Введите название издания: '),
+               read(Producer),
+               write('Введите год: '),
+               read(Year),
+               write(автор(_, _, Producer, Year)),
+               fail.
