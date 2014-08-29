@@ -1,6 +1,6 @@
 :- dynamic автор/4.
 
-автор(werwewerrr, werrrr, werrrrr, 1231233).
-автор(sdasdfsdf11111, sadddd234234234, 213123, 1212333).
-автор(name3, saasdasddd, asasdd, 12333).
+автор(author1, name1, producer1, 2014).
+автор(author1, name2, producer1, 2014).
+автор(author2, name3, producer3, 2008).
 

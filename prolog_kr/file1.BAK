@@ -5,7 +5,7 @@
 goal:-загрузка,
       показать_меню.
 
-загрузка:-consult('C:\\Users\\serge\\Институт\\source\\University\\prolog_kr\\autors.txt'),
+загрузка:-consult('D:\\Институт\\source\\University\\prolog_kr\\autors.txt'),
           told.
 показать_меню:-repeat,
                write('1. просмотр базы данных'), nl,
@@ -17,7 +17,7 @@ goal:-загрузка,
                read(X),
                process(X),!.
                
-process(0):-сохранить_файл.
+process(0).
 process(1):-просмотр_базы_данных.
 process(2):-добавление_записи.
 process(3):-удалить_запись.
@@ -43,10 +43,11 @@ process(_):-fail.
                read(Producer),
                write('год издания:'),
                read(Year),
-               assertz(автор(AuthorName, BookName, Producer, Year)).
+               assertz(автор(AuthorName, BookName, Producer, Year)),
+               сохранить_файл.
 
 просмотр_базы_данных:-write('Просмотр базы данных'), nl,
-                      listing(автор/4),
+                      весь_список,
                       fail.
 
 удалить_запись:-write('Удалить по имени: '),
@@ -54,16 +55,45 @@ process(_):-fail.
                 автор(AuthorName, _, _, _),
                 write(AuthorName), write(' - удален.'), nl, nl,
                 retract(автор(AuthorName, _, _, _)),
+                сохранить_файл,
                 fail.
 
-сохранить_файл:-tell('C:\\Users\\serge\\Институт\\source\\University\\prolog_kr\\autors.txt'),
+сохранить_файл:-tell('D:\\Институт\\source\\University\\prolog_kr\\autors.txt'),
                 listing(автор/4),
                 told.
                 
 запрос_к_базе:-write('Вывод строк по заданию:'), nl, nl,
-               write('Введите название издания: '),
-               read(Producer),
+               write('Введите издание: '),
+               read(X),
                write('Введите год: '),
-               read(Year),
-               write(автор(_, _, Producer, Year)),
+               read(Y),
+               поиск_имя(X, Y),
                fail.
+
+весь_список:-автор(AuthorName, BookName, Producer, Year),
+             write('издание: '),
+             write(Producer),
+             write(' '),
+             write('имя: '),
+             write(AuthorName),
+             write(' '),
+             write('книга: '),
+             write(BookName),
+             write(' '),
+             write('год: '),
+             writeln(Year).
+
+поиск_имя(X, Y):-автор(AuthorName, BookName, Producer, Year),
+                 Producer == X,
+                 Year > Y,
+                 write('издание: '),
+                 write(X),
+                 write(' '),
+                 write('имя: '),
+                 write(AuthorName),
+                 write(' '),
+                 write('книга: '),
+                 write(BookName),
+                 write(' '),
+                 write('год: '),
+                 writeln(Year).
